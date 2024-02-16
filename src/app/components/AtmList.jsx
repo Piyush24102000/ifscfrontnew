@@ -6,7 +6,11 @@ import { Pagination } from "flowbite-react";
 
 const AtmList = (props) => {
   let atmData = props.atmData || [];
-
+  let bankName = props.bankName;
+  let districtName = props.districtName;
+  let cityName = props.cityName;
+  let branchName = props.branchName;
+  
   let router = useRouter();
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 20; // Set how many items you want per page
@@ -25,9 +29,11 @@ const AtmList = (props) => {
     totalPages = Math.ceil(atmData.length / itemsPerPage);
   }
 
-  // function handleAtmPage(id) {
-  //   router.push(`/atmdata/${id}`);
-  // }
+  function handleAtmPage(id) {
+    router.push(
+      `/bank/${bankName}/district/${districtName}/city/${cityName}/branch/${branchName}/atmdata/${id}`
+    );
+    }
 
   return (
     <div>

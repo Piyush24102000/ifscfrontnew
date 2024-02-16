@@ -166,17 +166,17 @@ const BankDistCityBranch = ({ params }) => {
                 selectedRadio == 'both' ?
                     <div className="grid md:grid-cols-2 gap-4">
                         <div className="w-full">
-                            <BankList bankData={bankData} />
+                            <BankList bankData={bankData} bankName={bankName} districtName={districtName} cityName={cityName} branchName={branchName} />
                         </div>
                         <div className="w-full">
-                            <AtmList atmData={atmData} />
+                            <AtmList atmData={atmData} bankName={bankName} districtName={districtName} cityName={cityName} branchName={branchName} />
                         </div>
                     </div>
                     :
                     selectedRadio == 'bank' ?
-                        <BankList bankData={bankData} />
+                        <BankList bankData={bankData} bankName={bankName} districtName={districtName} cityName={cityName} branchName={branchName} />
                         :
-                        <AtmList atmData={atmData} />
+                        <AtmList atmData={atmData} bankName={bankName} districtName={districtName} cityName={cityName} branchName={branchName} />
 
             }
         </div>

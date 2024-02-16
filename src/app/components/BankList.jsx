@@ -6,11 +6,18 @@ import { useRouter } from "next/navigation";
 
 const BankList = (props) => {
   let bankData = props.bankData || [];
+  let bankName = props.bankName;
+  let districtName = props.districtName;
+  let cityName = props.cityName;
+  let branchName = props.branchName;
+
   let router = useRouter();
 
-  // const handleBankPage = (id) => {
-  //   router.push(`/bankdata/${id}`);
-  // };
+  const handleBankPage = (id) => {
+    router.push(
+      `/bank/${bankName}/district/${districtName}/city/${cityName}/branch/${branchName}/bankdata/${id}`
+    );
+  };
   return (
     <div>
       {/* Main Body */}
