@@ -70,7 +70,54 @@ const BankDistCityBranch = ({ params }) => {
             getATMData()
         }
     }, [bankName, districtName, branchName, cityName])
+    
+    async function newData() {
+        async function newQuickBankData() {
+            try {
+                if (quickBank.length > 0) {
+                    let response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/quickSearch/search`, {
+                        method: "POST",
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            bank: quickBank
+                        })
+                    });
+                    let bankData = await response.json();
+                    setBankData(bankData.data);
+                } else {
+                    alert("Please enter Bank, City and Branch")
+                }
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        newQuickBankData()
 
+        async function getQuickATMDetails() {
+            try {
+                if (quickBank.length > 0) {
+                    let response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/atm/getQuickAtmData`, {
+                        method: "POST",
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            atmData: quickBank
+                        })
+                    });
+                    let atmDataResponse = await response.json();
+                    setAtmData(atmDataResponse.data);
+                }
+
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        getQuickATMDetails()
+
+    }
     return (
         <div>
 

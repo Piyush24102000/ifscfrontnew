@@ -148,6 +148,13 @@ const Search = () => {
     }
   }
 
+  function getQuickBankDetails() {
+    if (quickBank.length > 0) {
+      router.push(`/quicksearch/${quickBank}`);
+    } else {
+      alert("Please enter bank city and branch");
+    }
+  }
   return (
     <>
       <section className="text-gray-600 body-font">

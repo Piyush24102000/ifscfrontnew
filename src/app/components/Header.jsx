@@ -2,6 +2,7 @@
 import React from "react";
 import Image from "next/image";
 import { Navbar } from "flowbite-react";
+import { useRouter } from "next/navigation";
 
 const Header = () => {
   /* JSON-LD */
@@ -34,8 +35,11 @@ const Header = () => {
       },
     ],
   };
-
   /* Main */
+  const router = useRouter();
+  function handleQuickSearch() {
+    router.push(`/quicksearch`);
+  }
   return (
     <div>
       {/* Add JSON-LD to your page */}
@@ -44,7 +48,7 @@ const Header = () => {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonld) }}
       />
       {/* Main Body */}
-     <Navbar fluid rounded className=" justify-content-center ">
+      <Navbar fluid rounded className=" justify-content-center ">
         <Navbar.Brand className="" href="/">
           <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
             Bank IFSC Finder
@@ -53,6 +57,9 @@ const Header = () => {
 
         <div className="ml-auto">
           <Image
+            onClick={() => {
+              handleQuickSearch();
+            }}
             src="/magnify.png"
             height={50}
             width={50}
