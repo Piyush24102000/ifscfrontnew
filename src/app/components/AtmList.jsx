@@ -5,6 +5,13 @@ import Image from "next/image";
 import { Pagination } from "flowbite-react";
 
 const AtmList = (props) => {
+   /* JSON-LD */
+   const jsonld = {
+    "@context": "http://schema.org",
+    "@type": "AutomatedTellerMachine",
+    name: "Dynamic ATM Name",
+  };
+
   let atmData = props.atmData || [];
   let bankName = props.bankName;
   let districtName = props.districtName;
@@ -37,6 +44,11 @@ const AtmList = (props) => {
 
   return (
     <div>
+     {/* Add JSON-LD to your page */}
+     <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonld) }}
+      />
       {/* Main Body */}
       {/* Cards */}
       <div className="flex items-center justify-center py-8 px-4">

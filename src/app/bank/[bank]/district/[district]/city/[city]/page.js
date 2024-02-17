@@ -17,7 +17,6 @@ const BankDistCity = async ({ params }) => {
   let distName = decodeURIComponent(params.district)
   let cityName = decodeURIComponent(params.city)
   let data = await GetDataByBankDistCity(bankName, distName, cityName)
-
   return (
     <div>
       <BankHome bankData={data[0]} bankName={bankName} distName={distName} cityName={cityName}/>

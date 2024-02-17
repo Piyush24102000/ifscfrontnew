@@ -6,6 +6,30 @@ import { Spinner } from "flowbite-react";
 import slugify from "slugify";
 
 const Search = () => {
+  /* JSON-LD */
+  const jsonld = {
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    name: "Find Your Bank's IFSC Code and ATM Locator",
+    description:
+      "Offering both step-by-step and quick search tools to find bank IFSC codes, ATM locations, and branch details across India. Easy and accurate way to access banking information.",
+    url: "https://www.yourwebsite.com/search",
+    mainEntity: {
+      "@type": "SearchAction",
+      target:
+        "https://www.yourwebsite.com/search?bankName={bankName}&district={district}&city={city}&branch={branch}",
+      "query-input": "required name=bankName",
+      "query-input": "required name=districtName",
+      "query-input": "required name=cityName",
+      "query-input": "required name=branchName",
+    },
+    provider: {
+      "@type": "Organization",
+      name: "Innerkore Technologies",
+      url: "https://www.yourwebsite.com",
+    },
+  };
+
   /* States */
   let [loading, setLoading] = useState(false);
   let [bankName, setBankName] = useState("Choose a Bank");
@@ -157,6 +181,12 @@ const Search = () => {
   }
   return (
     <>
+      {/* Add JSON-LD to your page */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonld) }}
+      />
+      {/* Main Body */}
       <section className="text-gray-600 body-font">
         <h1 className="text-3xl font-medium title-font text-gray-900 mt-10 text-center">
           Go Step-by-Step or Do Quick Search

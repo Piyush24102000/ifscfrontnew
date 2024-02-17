@@ -9,14 +9,13 @@ async function GetDataByBankDistCity(bankName, distName, cityName) {
         body: JSON.stringify({ bankName, districtName: distName, cityName })
     })
     let responseData = await response.json()
-    return responseData.data[0].branches
+    return responseData.data[0].branchWithIds
 }
 const Page = async ({ params }) => {
     let bankName = params.bank
     let distName = decodeURIComponent(params.district)
     let cityName = decodeURIComponent(params.city)
     let data = await GetDataByBankDistCity(bankName, distName, cityName)
-
     return (
         <div>
             <Branches branches={data} city={cityName} distName = {distName} bankName={bankName} />

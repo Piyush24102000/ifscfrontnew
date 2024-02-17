@@ -50,7 +50,8 @@ const Branches = (props) => {
               className="bg-white w-full shadow rounded-lg mt-3 p-6"
             >
               <Link
-                href={`/bank/${bankName}/district/${distName}/city/${city}/branch/${branch} `              }
+                // href={`/bank/${bankName}/district/${distName}/city/${city}/branch/${branch}`}
+                href={`/bank/${bankName}/district/${distName}/city/${city}/bankdata/${branch.ids}`}
               >
                 <div className="md:flex items-center">
                   <div className="w-20 h-20rounded flex flex-shrink-0 items-center justify-center">
@@ -65,7 +66,8 @@ const Branches = (props) => {
                   <div className="md:ml-6 md:mt-0 mt-4 w-full ">
                     <div className="flex items-center justify-between">
                       <p className="text-xl font-semibold leading-5 text-gray-800">
-                        {branch}
+                        {/* {branch._source.BRANCH} */}
+                        {branch.branchNames}
                       </p>
                     </div>
                   </div>

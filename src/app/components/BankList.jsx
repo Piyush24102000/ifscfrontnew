@@ -5,6 +5,12 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 const BankList = (props) => {
+    /* JSON-LD */
+    const jsonld = {
+      "@context": "http://schema.org",
+      "@type": "BankOrCreditUnion",
+    };
+
   let bankData = props.bankData || [];
   let bankName = props.bankName;
   let districtName = props.districtName;
@@ -20,6 +26,11 @@ const BankList = (props) => {
   };
   return (
     <div>
+     {/* Add JSON-LD to your page */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonld) }}
+      />
       {/* Main Body */}
       <div className="flex items-center justify-center py-8 px-4">
         <div className="w-full flex flex-col items-center">

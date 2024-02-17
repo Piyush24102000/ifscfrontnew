@@ -5,12 +5,14 @@ import History from "./history";
 import Services from "./Services";
 import { logos } from "../../../utils/bankpic";
 import { actualBankNames } from "../../../utils/actualBankNames";
+import Cities from "./Cities";
 
 const BankHome = (props) => {
   let bankData = props.bankData;
   let bankName = props.bankName;
   let distName = props.distName;
   let cityName = props.cityName;
+
   let logoUrl;
   let logo = logos.find((item) => Object.keys(item)[0] === bankName);
   if (logo) {
@@ -33,7 +35,7 @@ const BankHome = (props) => {
 
   return (
     <>
-    <div>
+      <div>
         {/* Information (We will not show other info if distName or cityName is present) */}
         {bankName && !distName && !cityName ? (
           <>
@@ -106,55 +108,80 @@ const BankHome = (props) => {
         )}
 
         {/* Stats */}
-        <div className="container mx-auto mt-10">
-          <div className="relative xl:px-20 lg:px-20 md:px-12">
-            <h1 className="text-center xl:text-4xl text-3xl xl:w-4/6 w-5/6 mx-auto font-extrabold text-gray-800">
+        <div className="container mx-auto mt-10 px-4 lg:px-20">
+          <div className="text-center">
+            <h1 className="text-3xl lg:text-4xl font-extrabold text-gray-800 mx-auto">
               Your Trusted Partner in Global Finance
             </h1>
-            <p className="text-xl text-center text-gray-600 xl:w-4/6 w-5/6 mx-auto pt-5 pb-8 font-normal">
+            <p className="text-xl text-gray-600 mx-auto pt-5 pb-8">
               In response to changing financial landscapes, we're dedicated to
               maintaining our promise of delivering exceptional, cost-effective
               banking services. Our unwavering commitment to quality is why
               customers worldwide trust us as their banking partner.
             </p>
-            <div className="flex justify-center items-center bg-white w-4/5 mx-auto">
-              <div className="flex justify-around w-full max-w-xs md:max-w-sm lg:max-w-lg xl:max-w-xl bg-white pt-8 pb-8">
-                {bankName && !distName && !cityName ? (
-                  <>
-                    <div className="text-center">
-                      <p className="text-5xl font-bold text-indigo-700 pb-1">
-                        {bankData.districtCount}
-                      </p>
-                      <p className="text-2xl text-gray-600 font-normal">
-                        Districts
-                      </p>
-                      <Link href={`/bank/${bankName}/districts`}>
-                        <button className="mx-2 my-2 bg-white transition duration-150 ease-in-out focus:outline-none rounded text-gray-800 border border-gray-300 px-6 py-2 text-xs">
-                          View Districts
-                        </button>
-                      </Link>
-                    </div>
-                    <div className="text-center">
-                      <p className="text-5xl font-bold text-indigo-700 pb-1">
-                        {bankData.citiesCount}
-                      </p>
-                      <p className="text-2xl text-gray-600 font-normal">
-                        Cities
-                      </p>
-                      <Link href={`/bank/${bankName}/cities`}>
-                        <button className="mx-2 my-2 bg-white transition duration-150 ease-in-out focus:outline-none rounded text-gray-800 border border-gray-300 px-6 py-2 text-xs">
-                          View Cities
-                        </button>
-                      </Link>
-                    </div>
-                  </>
-                ) : (
-                  // BankName distName  is present but not cityName then show cities
-                  <>
-                    {bankName && distName && !cityName ? (
-                      <>
-                        <div className="text-center">
-                          <p className="text-5xl font-bold text-indigo-700 pb-1">
+
+            {/* Adjusted container to ensure more flexibility for child components */}
+            <div className="flex flex-wrap justify-center items-center bg-white mx-auto py-8">
+              {bankName && !distName && !cityName ? (
+                <>
+                  <div className="text-center px-4">
+                    <p className="text-5xl font-bold text-indigo-700">
+                      {bankData.districtCount}
+                    </p>
+                    <p className="text-2xl text-gray-600">Districts</p>
+                    <Link href={`/bank/${bankName}/districts`}>
+                      <button className="inline-block bg-white transition duration-150 ease-in-out focus:outline-none rounded text-gray-800 border border-gray-300 px-6 py-2 text-sm my-2">
+                        View Districts
+                      </button>
+                    </Link>
+                  </div>
+                  <div className="text-center px-4">
+                    <p className="text-5xl font-bold text-indigo-700">
+                      {bankData.citiesCount}
+                    </p>
+                    <p className="text-2xl text-gray-600">Cities</p>
+                    <Link href={`/bank/${bankName}/cities`}>
+                      <button className="inline-block bg-white transition duration-150 ease-in-out focus:outline-none rounded text-gray-800 border border-gray-300 px-6 py-2 text-sm my-2">
+                        View Cities
+                      </button>
+                    </Link>
+                  </div>
+                </>
+              ) : bankName && distName && !cityName ? (
+                <div className="w-full">
+                  <Cities
+                    cities={bankData.distinctCities}
+                    district={distName}
+                    bankName={bankName}
+                  />
+                </div>
+              ) : (
+                <div className="text-center px-4">
+                  <p className="text-5xl font-bold text-indigo-700">
+                    {bankData.branchCount}
+                  </p>
+                  <p className="text-2xl text-gray-600">
+                    Branches
+                  </p>
+                  <Link href={`/bank/${bankName}/district/${distName}/city/${cityName}/branches`}>
+                    <button className="inline-block bg-white transition duration-150 ease-in-out focus:outline-none rounded text-gray-800 border border-gray-300 px-6 py-2 text-sm my-2">
+                      View Branches
+                    </button>
+                  </Link>
+                </div>
+              )}
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default BankHome;
+{
+  /* <p className="text-5xl font-bold text-indigo-700 pb-1">
                             {bankData.citiesCount}
                           </p>
                           <p className="text-2xl text-gray-600 font-normal">
@@ -166,38 +193,5 @@ const BankHome = (props) => {
                             <button className="mx-2 my-2 bg-white transition duration-150 ease-in-out focus:outline-none rounded text-gray-800 border border-gray-300 px-6 py-2 text-xs">
                               View Cities
                             </button>
-                          </Link>
-                        </div>
-                      </>
-                    ) : (
-                      // BankName cityName  distName all are present then show branches
-                      <>
-                        <div className="text-center">
-                          <p className="text-5xl font-bold text-indigo-700 pb-1">
-                            {bankData.branchCount}
-                          </p>
-                          <p className="text-2xl text-gray-600 font-normal">
-                            Branches
-                          </p>
-                          <Link
-                            href={`/bank/${bankName}/district/${distName}/city/${cityName}/branches`}
-                          >
-                            <button className="mx-2 my-2 bg-white transition duration-150 ease-in-out focus:outline-none rounded text-gray-800 border border-gray-300 px-6 py-2 text-xs">
-                              View Branches
-                            </button>
-                          </Link>
-                        </div>
-                      </>
-                    )}
-                  </>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
-  );
-};
-
-export default BankHome;
+                          </Link> */
+}

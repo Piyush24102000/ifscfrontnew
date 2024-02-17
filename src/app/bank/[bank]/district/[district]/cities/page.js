@@ -10,7 +10,7 @@ async function GetDataByBankDist(bankName, distName) {
     })
     let responseData = await response.json()
     return responseData.data[0].distinctCities
-}
+} 
 
 const page = async ({ params }) => {
     let bankName = params.bank //removed the decodeURIComponent
