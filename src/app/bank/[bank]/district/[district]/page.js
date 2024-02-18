@@ -1,4 +1,5 @@
 import BankHome from '@/app/components/BankHome'
+import NotFound from '@/app/not-found'
 
 async function GetDataByBankDist(bankName, distName) {
   let response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/stepSearch/getDataByBankDist`, {
@@ -9,7 +10,7 @@ async function GetDataByBankDist(bankName, distName) {
     body: JSON.stringify({ bankName, districtName: distName })
   })
   let responseData = await response.json()
-  return responseData.data
+  return responseData
 }
 const BankDistData = async ({ params }) => {
   let bankName = params.bank
@@ -17,7 +18,10 @@ const BankDistData = async ({ params }) => {
   let data = await GetDataByBankDist(bankName, distName)
   return (
     <div>
-      <BankHome bankData={data[0]} bankName={bankName} distName={distName} />
+      {
+        data.success == false ? <NotFound /> :
+          <BankHome bankData={data.data[0]} bankName={bankName} distName={distName} />
+      }
     </div>
   )
 }

@@ -135,7 +135,7 @@ const BankHome = (props) => {
                       </button>
                     </Link>
                   </div>
-                  <div className="text-center px-4">
+                  {/* <div className="text-center px-4">
                     <p className="text-5xl font-bold text-indigo-700">
                       {bankData.citiesCount}
                     </p>
@@ -145,7 +145,7 @@ const BankHome = (props) => {
                         View Cities
                       </button>
                     </Link>
-                  </div>
+                  </div> */}
                 </>
               ) : bankName && distName && !cityName ? (
                 <div className="w-full">
@@ -180,18 +180,3 @@ const BankHome = (props) => {
 };
 
 export default BankHome;
-{
-  /* <p className="text-5xl font-bold text-indigo-700 pb-1">
-                            {bankData.citiesCount}
-                          </p>
-                          <p className="text-2xl text-gray-600 font-normal">
-                            Cities
-                          </p>
-                          <Link
-                            href={`/bank/${bankName}/district/${distName}/cities`}
-                          >
-                            <button className="mx-2 my-2 bg-white transition duration-150 ease-in-out focus:outline-none rounded text-gray-800 border border-gray-300 px-6 py-2 text-xs">
-                              View Cities
-                            </button>
-                          </Link> */
-}
